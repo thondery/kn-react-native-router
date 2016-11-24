@@ -8,11 +8,11 @@ import {
   StyleSheet,
   NavigationExperimental
 } from 'react-native'
-
 import * as types from './constant'
 import MainContainer from './container'
-import reducer from './reducer'
-import navigator from './navigator'
+import navigation from './reducer'
+import MainNavigator from './mainNavigator'
+import PageNavigator from './pageNavigator'
 import * as actions from './action'
 
 const styles = StyleSheet.create({
@@ -89,20 +89,20 @@ class RootNavigator extends Component {
       <NavigationCardStack style={styles.container}
                            direction={'horizontal'}
                            navigationState={navigationState}
-                           renderScene={this.renderScene.bind(this)}
-                           />
+                           renderScene={this.renderScene.bind(this)} />
     )
   }
 
   renderScene (sceneProps) {
     let route = sceneProps.scene.route
-    let _route = this.routes[route.key]
+    let _route = this.routes[route.key] || {}
+    let routeKey = _route.routeKey 
     switch (route.key) {
       case 'MainPage':
         return <MainContainer tabRoutes={this.tabRoutes} />
-      case _route.routeKey:
+      case routeKey:
         let Container = _route.component
-        return <Container />
+        return <Container {...route} />
       default:
         return null
     }
@@ -114,16 +114,8 @@ function getNavigatorName (name) {
   return name.replace(/(\w)/, e => e.toUpperCase()) + 'Navigator'
 }
 
-function getPageName (name) {
-  return name.replace(/(\w)/, e => e.toUpperCase()) + 'Page'
-}
-
 function getTabName (name) {
   return name.replace(/(\w)/, e => e.toUpperCase()) + 'Tab'
-}
-
-function getConstantType (name) {
-  return `NAVIGATOR_NAME_${name.toUpperCase()}`
 }
 
 function mapStateToProps (state) {
@@ -132,16 +124,17 @@ function mapStateToProps (state) {
   }
 }
 
-const Router = connect(mapStateToProps, {})(RootNavigator)
-
-
+const Router = connect(
+    mapStateToProps, {}
+  )(RootNavigator)
 
 export {
   Router,
   Route,
   TabRoute,
-  reducer,
-  navigator,
+  navigation,
+  PageNavigator,
+  MainNavigator,
   types,
   actions
 }

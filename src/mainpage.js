@@ -9,9 +9,6 @@ import {
   Image
 } from 'react-native'
 import TabNavigator from 'react-native-tab-navigator'
-//import Icon from 'react-native-vector-icons/FontAwesome'
-
-
 import Navigator from './navigator'
 import { 
   navigationPop,
@@ -21,7 +18,6 @@ import {
 
 const styles = StyleSheet.create({
   tabs: {
-    backgroundColor: '#f60',
     height: 100
   },
   textStyle: {
@@ -47,15 +43,14 @@ export default class MainPage extends Component {
           let NavigatorContainer = item.component
           return (
             <TabNavigator.Item key={i}
-              title={item.title}
-              style={styles.tab}
-              selected={selectedTab === item.tabName}
-              selectedTitleStyle={styles.selectedTextStyle}
-              titleStyle={styles.textStyle}
-              renderIcon={() => <Icon />}
-              renderSelectedIcon={() => <SelectIcon />}
-              onPress={() => onTabPress({key: item.tabName})}
-              >
+                               title={item.title}
+                               style={styles.tab}
+                               selected={selectedTab === item.tabName}
+                               selectedTitleStyle={styles.selectedTextStyle}
+                               titleStyle={styles.textStyle}
+                               renderIcon={() => <Icon />}
+                               renderSelectedIcon={() => <SelectIcon />}
+                               onPress={() => onTabPress({key: item.tabName})} >
               <NavigatorContainer />
             </TabNavigator.Item>
           )
@@ -64,13 +59,5 @@ export default class MainPage extends Component {
       </TabNavigator>
     )
   }
-}
-
-
-function getPageName (name) {
-  return name.replace(/(\w)/, e => e.toUpperCase()) + 'Page'
-}
-
-function getConstantType (name) {
-  return `NAVIGATOR_NAME_${name.toUpperCase()}`
+  
 }

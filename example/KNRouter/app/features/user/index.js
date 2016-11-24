@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import {
-  navigator as Navigator,
+  MainNavigator,
   actions
 } from 'kn-react-native-router'
 import * as types from '../../router'
@@ -12,11 +12,10 @@ import UserContainer from './container'
 
 const { 
   navigationPop,
-  navigationPush,
-  navigationLoginDefault
+  navigationPush
 } = actions
 
-class UserNavigator extends Navigator {
+class UserNavigator extends MainNavigator {
 
     constructor(props) {
       super(props)
@@ -37,7 +36,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
       navigationPop,
-      navigationPush,
-      navigationLoginDefault
+      navigationPush
     }
   )(UserNavigator)

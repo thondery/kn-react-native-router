@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-class UserContainer extends Component {
+class LoginContainer extends Component {
 
   render () {
     return (
@@ -16,17 +16,18 @@ class UserContainer extends Component {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-        <Text style={{fontSize:18}}>User Page</Text>
+        <Text style={{fontSize:18}}>Login Page</Text>
         <TouchableOpacity onPress={this.pressHandle.bind(this)}>
-          <Text>Goto Login Page</Text>
+          <Text>Goto Rigister Page</Text>
         </TouchableOpacity>
       </View>
     )
   }
 
   pressHandle () {
-    this.props.Router.push('login', '登录')
+    this.props.Router.push('RegisterPage', '注册', 'login')
   }
+
 }
 
-export default UserContainer
+export default LoginContainer

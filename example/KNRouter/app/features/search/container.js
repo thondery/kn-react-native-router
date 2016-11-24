@@ -18,7 +18,7 @@ class SearchContainer extends Component {
             }}>
         <Text style={{fontSize:18}}>Search Page</Text>
         <TouchableOpacity onPress={this.pressHandle.bind(this)}>
-          <Text>Back</Text>
+          <Text>Back Home Page</Text>
         </TouchableOpacity>
       </View>
     )

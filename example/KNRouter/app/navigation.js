@@ -1,7 +1,7 @@
 'use strict'
 
 import { combineReducers } from 'redux'
-import { reducer } from 'kn-react-native-router'
+import { navigation } from 'kn-react-native-router'
 import { navigationState } from './router'
 
 const initialState = {
@@ -11,4 +11,4 @@ const initialState = {
   }
 }
 
-export default (state = initialState, action) => reducer(state, action)
+export default (state = initialState, action) => navigation(state, action)

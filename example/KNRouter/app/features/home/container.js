@@ -1,7 +1,11 @@
 'use strict';
 
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { 
+  View, 
+  Text,
+  TouchableOpacity 
+} from 'react-native'
 
 class HomeContainer extends Component {
 
@@ -13,8 +17,15 @@ class HomeContainer extends Component {
               justifyContent: 'center'
             }}>
         <Text style={{fontSize:18}}>Home Page</Text>
+        <TouchableOpacity onPress={this.pressHandle.bind(this)}>
+          <Text>Goto Search Page</Text>
+        </TouchableOpacity>
       </View>
     )
+  }
+
+  pressHandle () {
+    this.props.Router.push('search', '搜索')
   }
 }
 

@@ -12,7 +12,8 @@ import {
 import {
   HomeNavigator,
   UserNavigator,
-  SearchNavigator
+  SearchNavigator,
+  LoginNavigator
 } from '../features'
 
 export default class Application extends Component {
@@ -20,20 +21,23 @@ export default class Application extends Component {
     return (
       <Router {...this.props}>
         <Route name={'search'}
-               component={() => <SearchNavigator />}
+               component={SearchNavigator}
+               />
+        <Route name={'login'}
+               component={LoginNavigator}
                />
         <TabRoute>
           <Route name={'home'} 
                  title={'首页'}
                  icon={() => <Icon name={'home'} size={20} color={'#666'} />}
                  selectIcon={() => <Icon name={'home'} size={20} color={'#f60'} />} 
-                 component={() => <HomeNavigator />}
+                 component={HomeNavigator}
                  />
           <Route name={'user'} 
                  title={'我的'}
                  icon={() => <Icon name={'user'} size={20} color={'#666'} />}
                  selectIcon={() => <Icon name={'user'} size={20} color={'#f60'} />} 
-                 component={() => <UserNavigator />}
+                 component={UserNavigator}
                  />
         </TabRoute>
       </Router>

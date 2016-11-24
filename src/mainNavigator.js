@@ -6,9 +6,9 @@ import {
   NavigationExperimental, 
   View,
   Text,
-  StyleSheet
+  StyleSheet, 
+  BackAndroid
 } from 'react-native'
-
 import * as types from './constant'
 
 const {
@@ -16,56 +16,76 @@ const {
   CardStack: NavigationCardStack
 } = NavigationExperimental
 
+const {
+  BackButton: NavigationHeaderBackButton,
+  Title: NavigationHeaderTitle
+} = NavigationHeader
+
 const styles = StyleSheet.create({
   navigator: {
     flex: 1
   }
 })
 
-
-
-
-
-
-
-export default class Navigator extends Component {
+export default class RootNavigator extends Component {
 
   constructor (props) {
     super(props)
-    //this.handleBack = this._handleBack.bind(this)
     this.name = ''
     this.container = null
-    //this.showHeader = true
+    this.showHeader = true
+    this.Router = {
+      push: this.routerPush.bind(this),
+      pop: this.routerPop.bind(this)
+    }
   }
 
+  renderTitleComponent(sceneProps) {
+    const title = sceneProps.scene.route.title || ''
+    return (
+      <NavigationHeaderTitle>{title}</NavigationHeaderTitle>
+    )
+  }
 
+  renderHeader(sceneProps) {
+    let route = sceneProps.scene.route
+    if (!this.showHeader) return
+    switch (route.key) {
+      default:
+        return (
+          <NavigationHeader
+            {...sceneProps}
+            onNavigateBack={() => this.props.navigationPop()}
+            renderTitleComponent={this.renderTitleComponent.bind(this)} />
+        )
+    }
+  }
 
   renderScene(sceneProps) {
     let route = sceneProps.scene.route
     let pageName = getPageName(this.name)
     let Container = this.container
-    let Router = {
-      push: this.routerPush.bind(this),
-      pop: this.routerPop.bind(this)
-    }
     switch (route.key) {
       case pageName:
         return (
-          <Container Router={Router}
-                     
-                      />
+          <Container Router={this.Router} />
         )
       default:
         return null
     }
   }
 
-  routerPush (page, title, root = types.NAVIGATOR_NAME_ROOT) {
+  routerPush (page, title, root = 'root') {
     let opts = {
-      key: getNavigatorName(page),
-      title: title
+      key: /Page$/i.test(page) ? page : getNavigatorName(page),
+      title: title,
+      opts: {
+        title: title
+      },
+      root: root
     }
-    this.props.navigationPush(opts, root)
+    let ROOT = getConstantType(root)
+    this.props.navigationPush(opts, ROOT)
   }
 
   routerPop () {
@@ -75,15 +95,13 @@ export default class Navigator extends Component {
   render() {
     return (
       <NavigationCardStack style={styles.navigator}
-                           direction='horizontal'
                            navigationState={this.props.navigationState}
                            renderScene={this.renderScene.bind(this)}
-                           //renderHeader={this.renderHeader.bind(this)} 
+                           renderHeader={this.renderHeader.bind(this)} 
                            />
     )
   }
 }
-
 
 function getPageName (name) {
   return name.replace(/(\w)/, e => e.toUpperCase()) + 'Page'
@@ -96,4 +114,3 @@ function getConstantType (name) {
 function getNavigatorName (name) {
   return name.replace(/(\w)/, e => e.toUpperCase()) + 'Navigator'
 }
-
