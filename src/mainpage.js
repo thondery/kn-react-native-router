@@ -1,15 +1,11 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  StyleSheet, 
-  View, 
-  Text, 
-  Image
+  StyleSheet
 } from 'react-native'
 import TabNavigator from 'react-native-tab-navigator'
-import Navigator from './navigator'
 import { 
   navigationPop,
   navigationPush,
