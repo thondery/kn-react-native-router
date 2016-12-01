@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "kn-react-native-router": "0.0.4",
+    "kn-react-native-router": "0.0.6",
     "react": "15.3.2",
     "react-native": "^0.37.0",
     "react-native-vector-icons": "^2.1.0",

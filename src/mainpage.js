@@ -3,7 +3,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
-  StyleSheet
+  StyleSheet,
+  Platform
 } from 'react-native'
 import TabNavigator from 'react-native-tab-navigator'
 import { 
@@ -19,10 +20,14 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#666',
     fontSize: 12,
-    marginBottom: 6
+    marginBottom: Platform.OS === 'ios' ? 6 : 4,
+    lineHeight: 12
   },
   selectedTextStyle: {
     color: '#f60'
+  },
+  tab: {
+    
   }
 })
 

@@ -7,7 +7,8 @@ import {
   View,
   Text,
   StyleSheet, 
-  BackAndroid
+  BackAndroid,
+  Platform
 } from 'react-native'
 import * as types from './constant'
 
@@ -80,7 +81,10 @@ export default class MainNavigator extends Component {
     const { title, root } = route
     let headerTitle = root ? title : this.props.title || title
     return (
-      <NavigationHeaderTitle>{headerTitle}</NavigationHeaderTitle>
+      <NavigationHeaderTitle textStyle={{
+                               textAlign: 'center', 
+                               fontWeight: Platform.OS === 'ios' ? '500' : '100'
+                             }}>{headerTitle}</NavigationHeaderTitle>
     )
   }
 
