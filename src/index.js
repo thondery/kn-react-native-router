@@ -84,9 +84,9 @@ class RootNavigator extends Component {
   }
 
   render () {
-    let { navigationState } = this.props
+    let { style, navigationState } = this.props
     return (
-      <NavigationCardStack style={styles.container}
+      <NavigationCardStack style={[styles.container, style]}
                            direction={'horizontal'}
                            navigationState={navigationState}
                            renderScene={this.renderScene.bind(this)} />

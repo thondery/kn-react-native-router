@@ -97,6 +97,10 @@ export default class MainNavigator extends Component {
     )
   }
 
+  renderRightComponent(sceneProps) {
+    return null
+  }
+
   renderHeader(sceneProps) {
     let route = sceneProps.scene.route
     if (!this.showHeader) return
@@ -106,7 +110,8 @@ export default class MainNavigator extends Component {
           <NavigationHeader {...sceneProps}
                             onNavigateBack={() => this.onNavigateBack(sceneProps)}
                             renderTitleComponent={this.renderTitleComponent.bind(this)}
-                            renderLeftComponent={this.renderLeftComponent.bind(this)} />
+                            renderLeftComponent={this.renderLeftComponent.bind(this)}
+                            renderRightComponent={this.renderRightComponent.bind(this)} />
         )
     }
   }

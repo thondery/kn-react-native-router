@@ -51,16 +51,25 @@ export default class RootNavigator extends Component {
     )
   }
 
+  renderLeftComponent(sceneProps) {
+    return null
+  }
+
+  renderRightComponent(sceneProps) {
+    return null
+  }
+
   renderHeader(sceneProps) {
     let route = sceneProps.scene.route
     if (!this.showHeader) return
     switch (route.key) {
       default:
         return (
-          <NavigationHeader
-            {...sceneProps}
-            onNavigateBack={() => this.props.navigationPop()}
-            renderTitleComponent={this.renderTitleComponent.bind(this)} />
+          <NavigationHeader {...sceneProps}
+                            onNavigateBack={() => this.props.navigationPop()}
+                            renderTitleComponent={this.renderTitleComponent.bind(this)}
+                            renderLeftComponent={this.renderLeftComponent.bind(this)}
+                            renderRightComponent={this.renderRightComponent.bind(this)} />
         )
     }
   }
