@@ -101,8 +101,8 @@ export default class RootNavigator extends Component {
     this.props.navigationPush(opts, ROOT)
   }
 
-  routerPop () {
-    this.props.navigationPop(types.NAVIGATOR_NAME_ROOT)
+  routerPop (target) {
+    this.props.navigationPop(target ? getConstantType(target) : types.NAVIGATOR_NAME_ROOT)
   }
 
   render() {
